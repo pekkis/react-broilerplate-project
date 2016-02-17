@@ -28,7 +28,6 @@
     "body-parser": "^1.15.0",
     "classnames": "^2.2.3",
     "immutable": "^3.7.6",
-    "jsdom": "^8.0.2",
     "node-uuid": "^1.4.7",
     "react-fa": "^4.0.0"
   },

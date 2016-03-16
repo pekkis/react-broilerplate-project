@@ -22,8 +22,8 @@
   "author": "Pekkis",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@dr-kobros/react-broilerplate": "^0.5.0",
-    "@dr-kobros/react-broilerplate-server-express": "^0.1.1",
+    "@dr-kobros/react-broilerplate": "^0.6.0",
+    "@dr-kobros/react-broilerplate-server-express": "^0.2.0",
     "axios": "^0.9.1",
     "body-parser": "^1.15.0",
     "classnames": "^2.2.3",

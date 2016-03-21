@@ -15,6 +15,7 @@ Requirements
 -------------
 
 - A relatively new Node.js. I'm running 5.x nowadays. Nobody really knows.
+- NPM version 3. My understanding of how to mark dependencies vs dependencies of dependencies is not complete.
 
 Stack
 ------

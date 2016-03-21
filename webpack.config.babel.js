@@ -176,4 +176,4 @@ const envs = {
     }
 }
 
-module.exports = merge(common, envs[ENV]);
+export default merge(common, envs[ENV]);

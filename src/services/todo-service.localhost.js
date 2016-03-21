@@ -2,14 +2,13 @@ import axios from 'axios';
 
 export default {
 
-    get: () => {
+  get: () => (
+    axios
+      .get('http://localhost:8888/api/todo')
+      .then(response => response.data)
+  ),
 
-        return axios
-            .get('http://localhost:8888/api/todo')
-            .then(response => response.data);
-    },
-
-    save: (todos) => {
-        return axios.post('http://localhost:8888/api/todo', todos);
-    }
+  save: (todos) => (
+    axios.post('http://localhost:8888/api/todo', todos)
+  ),
 };

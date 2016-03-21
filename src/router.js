@@ -8,36 +8,36 @@ import TodoPage from './components/container/TodoPageContainer';
 
 export function createRouter({ store, history }) {
 
-    const { fetcher, prefetcher } = createFetchers(store);
+  const { fetcher, prefetcher } = createFetchers(store);
 
-    function initApp(nextState, replaceState, callback) {
-        store.dispatch(receiveTodos()).then(() => {
-            callback();
-        });
-    }
+  function initApp(nextState, replaceState, callback) {
+    store.dispatch(receiveTodos()).then(() => {
+      callback();
+    });
+  }
 
-    /*
-    function requiresLogin(nextState, replaceState) {
-        const user = store.getState().user.get('user');
+  /*
+  function requiresLogin(nextState, replaceState) {
+      const user = store.getState().user.get('user');
 
-        if (user.anonymous) {
-            replaceState(
-                {
-                    'next': nextState.location.pathname,
-                },
-                '/login'
-            );
-        }
-    }
-    */
+      if (user.anonymous) {
+          replaceState(
+              {
+                  'next': nextState.location.pathname,
+              },
+              '/login'
+          );
+      }
+  }
+  */
 
-    return (
-        <Router history={history}>
-            <Route path="/" component={App} onEnter={initApp}>
-                <IndexRoute component={IndexPage} onEnter={prefetcher}/>
-                <Route path="todo/:uuid" component={TodoPage}/>
-            </Route>
-        </Router>
-    );
+  return (
+    <Router history={history}>
+      <Route path="/" component={App} onEnter={initApp}>
+        <IndexRoute component={IndexPage} onEnter={prefetcher}/>
+        <Route path="todo/:uuid" component={TodoPage}/>
+      </Route>
+    </Router>
+  );
 }
 

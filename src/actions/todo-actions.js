@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { List } from 'immutable';
 import todoService from '../services/todo-service.localhost';
 
@@ -9,47 +8,47 @@ export const SAVE_TODOS = 'SAVE_TODOS';
 export const MOVE_TODO = 'MOVE_TODO';
 
 export function addTodo(todo) {
-    return {
-        type: ADD_TODO,
-        payload: todo
-    };
+  return {
+    type: ADD_TODO,
+    payload: todo,
+  };
 }
 
 export function removeTodo(id) {
-    return {
-        type: REMOVE_TODO,
-        payload: id
-    };
+  return {
+    type: REMOVE_TODO,
+    payload: id,
+  };
 }
 
 export function moveTodo(id, direction) {
-    return {
-        type: MOVE_TODO,
-        payload: {
-            id: id,
-            direction: direction
-        }
-    };
+  return {
+    type: MOVE_TODO,
+    payload: {
+      id,
+      direction,
+    },
+  };
 }
 
 export function receiveTodos() {
-    return function(dispatch) {
-        return todoService.get().then(todos => {
-            dispatch({
-                type: RECEIVE_TODOS,
-                payload: List(todos)
-            });
-        });
-    };
+  return function d(dispatch) {
+    return todoService.get().then(todos => {
+      dispatch({
+        type: RECEIVE_TODOS,
+        payload: List(todos),
+      });
+    });
+  };
 }
 
 export function saveTodos(todos) {
-    return function(dispatch) {
-        return todoService.save(todos).then(() => {
-            dispatch({
-                type: SAVE_TODOS
-            });
-        });
-    };
+  return function d(dispatch) {
+    return todoService.save(todos).then(() => {
+      dispatch({
+        type: SAVE_TODOS,
+      });
+    });
+  };
 }
 

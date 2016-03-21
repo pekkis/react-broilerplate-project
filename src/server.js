@@ -1,7 +1,7 @@
 import uuid from 'node-uuid';
 import { createServer } from '@dr-kobros/react-broilerplate-server-express/lib/server';
 import config from '../config.server';
-import webpackConfig from '../webpack.config';
+import webpackConfig from '../webpack.config.babel';
 import bodyParser from 'body-parser';
 import { List } from 'immutable';
 

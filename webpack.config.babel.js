@@ -1,12 +1,15 @@
-'use strict';
-
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin');
-const merge = require('merge');
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import Webpack_isomorphic_tools_plugin from 'webpack-isomorphic-tools/plugin';
+import merge from 'merge';
+import autoprefixer from 'autoprefixer';
+import precss from 'precss';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import pkg from './package.json';
+import clientConf from './config.client';
+import { getStyleLoader } from '@dr-kobros/react-broilerplate/lib/webpack';
+import isomorphicConfig from './webpack-isomorphic.js';
 
 const ENV = process.env.NODE_ENV;
 const PATHS = {
@@ -16,32 +19,14 @@ const PATHS = {
     test: path.resolve('./test')
 };
 
+
 let webpack_isomorphic_tools_plugin;
-webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(require('./webpack-isomorphic'));
-if (ENV === 'DEVELOPMENT') {
+webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
+    isomorphicConfig
+);
+if (ENV === 'development') {
     webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development();
 }
-
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const pkg = require('./package.json');
-
-function getStyleLoader(env, ret, loaders)
-{
-    let loader;
-    if (env !== 'prod') {
-        loaders.unshift('style-loader');
-        ret.loaders = loaders;
-    } else {
-        ret.loader = ExtractTextPlugin.extract(
-            'style-loader',
-            loaders
-        );
-    }
-
-    return ret;
-}
-
 
 const common = {
 
@@ -124,6 +109,21 @@ const common = {
     }
 };
 
+const plugins = [
+    webpack_isomorphic_tools_plugin,
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new HtmlWebpackPlugin({
+        title: 'JavaScript SchamaScript',
+        template: 'web/index.html',
+        favicon: 'web/favicon.ico',
+        inject: 'body'
+    }),
+    new webpack.DefinePlugin({
+        __DEVELOPMENT__: process.env.NODE_ENV === 'development',
+        __DEVTOOLS__: false
+    })
+];
+
 const envs = {
 
     test: {
@@ -141,23 +141,9 @@ const envs = {
             publicPath: '/',
             filename: 'client.[hash].js'
         },
-        plugins: [
-            webpack_isomorphic_tools_plugin,
-            new webpack.optimize.OccurenceOrderPlugin(),
+        plugins: plugins.concat([
             new webpack.HotModuleReplacementPlugin(),
-
-            new HtmlWebpackPlugin({
-                title: 'JavaScript SchamaScript',
-                template: 'web/index.html',
-                favicon: 'web/favicon.ico',
-                inject: 'body'
-            }),
-            new webpack.DefinePlugin({
-                __DEVELOPMENT__: process.env.NODE_ENV === 'development',
-                __DEVTOOLS__: false
-            }),
-
-        ]
+        ])
     },
     prod: {
         devtool: 'source-map',
@@ -170,16 +156,8 @@ const envs = {
             publicPath: '/',
             filename: '[name].[chunkhash].js'
         },
-        plugins: [
-            webpack_isomorphic_tools_plugin,
-            new webpack.optimize.OccurenceOrderPlugin(),
+        plugins: plugins.concat([
             new ExtractTextPlugin("styles.[contenthash].css"),
-            new HtmlWebpackPlugin({
-                title: 'Pekkis Goes To Movies',
-                template: 'web/index.html',
-                favicon: 'web/favicon.ico',
-                inject: 'body',
-            }),
             new webpack.optimize.UglifyJsPlugin({
                 'mangle': false,
                 'compress': {
@@ -193,12 +171,8 @@ const envs = {
                     /* eslint-enable camelcase */
                 }
             }),
-            new webpack.NoErrorsPlugin(),
-            new webpack.DefinePlugin({
-                __DEVELOPMENT__: process.env.NODE_ENV === 'development',
-                __DEVTOOLS__: false
-            }),
-        ]
+            new webpack.NoErrorsPlugin()
+        ])
     }
 }
 

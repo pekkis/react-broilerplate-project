@@ -5,6 +5,12 @@
     "new-cap": [2, {
       "capIsNewExceptions": ["List", "Map", "Seq", "Set", "Immutable.Map", "Immutable.Set", "Immutable.List"]
     }],
+  },
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    },
   }
 
 }

@@ -2,7 +2,7 @@
   "name": "@dr-kobros/react-broilerplate-project",
   "version": "1.0.0",
   "description": "An example project utilizing broilerplate",
-  "main": "src/client.js",
+  "main": "src/client.jsx",
   "scripts": {
     "clean": "rimraf ./dist",
     "build:webpack": "NODE_ENV=prod webpack",

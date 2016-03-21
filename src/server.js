@@ -11,40 +11,38 @@ createServer(config, webpackConfig, (app) => {
     {
       id: uuid.v4(),
       text: 'Get 100 litres of battery acid',
-      category: 0
+      category: 0,
     },
     {
       id: uuid.v4(),
       text: 'Get gardening tools',
-      category: 0
+      category: 0,
     },
     {
       id: uuid.v4(),
       text: 'Carve up the "meat"',
-      category: 0
+      category: 0,
     },
     {
       id: uuid.v4(),
       text: 'Liquidate the pieces',
-      category: 0
+      category: 0,
     },
     {
       id: uuid.v4(),
       text: 'Dump the acid in the Danube',
-      category: 1
+      category: 1,
     }
   );
 
-  app.get('/api/todo', function(req, res, next) {
+  app.get('/api/todo', (req, res) => {
     setTimeout(
-      function() {
-        res.send(todos.toJS());
-      },
+      () => res.send(todos.toJS()),
       Math.random() * 300
-      );
+    );
   });
 
-  app.post('/api/todo', function(req, res, next) {
+  app.post('/api/todo', (req, res) => {
     todos = List(req.body);
     res.send(['ok']);
   });

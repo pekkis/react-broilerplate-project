@@ -27,6 +27,8 @@
     "axios": "^0.11.0",
     "body-parser": "^1.15.1",
     "classnames": "^2.2.5",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
     "immutable": "^3.8.1",
     "node-uuid": "^1.4.7",
     "normalize.css": "^4.1.1",

@@ -1,1 +1,1 @@
-export { default as todo } from './todo-reducer';
+export { default as todo } from '../ducks/todo';

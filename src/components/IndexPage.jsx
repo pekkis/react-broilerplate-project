@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
-import { receiveTodos } from '../actions/todo-actions';
+import { receiveTodos } from '../ducks/todo';
 
 class IndexPage extends React.Component {
 

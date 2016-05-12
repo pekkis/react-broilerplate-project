@@ -7,7 +7,7 @@ import {
   receiveTodos,
   saveTodos,
   moveTodo,
-} from '../../actions/todo-actions';
+} from '../../ducks/todo';
 
 export default connect(
   state => ({

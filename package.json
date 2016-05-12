@@ -1,6 +1,6 @@
 {
   "name": "@dr-kobros/react-broilerplate-project",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An example project utilizing broilerplate",
   "main": "src/client.jsx",
   "scripts": {

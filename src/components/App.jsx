@@ -1,20 +1,21 @@
 import React from 'react';
-
 import styles from './App.pcss';
+import logo from '../images/trollo.png';
 
-export default class App extends React.Component {
-
-  render() {
-
-    return (
-      <div className={styles.root}>
+const App = props => {
+  const { children } = props;
+  return (
+    <div className={styles.root}>
       <h1>
-      <img src={require('../images/trollo.png')} /> Trollo
+        <img alt="Trollo" src={logo} /> Trollo
       </h1>
+      {children}
+    </div>
+  );
+};
 
-      {this.props.children}
+App.propTypes = {
+  children: React.PropTypes.node.isRequired,
+};
 
-      </div>
-      );
-  }
-}
+export default App;

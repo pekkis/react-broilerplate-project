@@ -1,9 +1,8 @@
 import React from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const TodoPage = props => {
-
   const { todos, params } = props;
-
   const currentTodo = todos.find(todo => todo.id === params.uuid);
 
   if (!currentTodo) {
@@ -17,6 +16,11 @@ const TodoPage = props => {
       {currentTodo.text}
     </div>
   );
+};
+
+TodoPage.propTypes = {
+  todos: ImmutablePropTypes.list.isRequired,
+  params: React.PropTypes.object.isRequired,
 };
 
 export default TodoPage;

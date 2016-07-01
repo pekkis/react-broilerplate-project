@@ -7,7 +7,7 @@ import styles from './Todo.pcss';
 
 const Todo = props => {
 
-  const { todo, onRemove, onToggle, onMove } = props;
+  const { todo, onRemove, onMove } = props;
 
   const classes = classnames(
     styles.root

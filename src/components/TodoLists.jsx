@@ -5,7 +5,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from './TodoLists.pcss';
 
 const TodoLists = props => {
-  const { onToggle, onRemove, onMove, todos } = props;
+  const { onRemove, onMove, todos } = props;
 
   return (
     <div className={styles.root}>

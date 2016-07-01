@@ -16,6 +16,8 @@
         "Immutable.Range"
       ]
     }],
+
+    "react/jsx-no-bind": [1]
   },
 
   "parserOptions": {

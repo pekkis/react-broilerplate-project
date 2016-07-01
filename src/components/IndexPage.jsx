@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const IndexPage = props => {
   const {
@@ -27,6 +28,9 @@ IndexPage.propTypes = {
   saveTodos: React.PropTypes.func.isRequired,
   addTodo: React.PropTypes.func.isRequired,
   removeTodo: React.PropTypes.func.isRequired,
+  moveTodo: React.PropTypes.func.isRequired,
+  isChanged: React.PropTypes.bool.isRequired,
+  todos: ImmutablePropTypes.list.isRequired,
 };
 
 export default IndexPage;

@@ -37,7 +37,7 @@ TodoList.propTypes = {
   todos: ImmutablePropTypes.list.isRequired,
   onRemove: React.PropTypes.func.isRequired,
   onMove: React.PropTypes.func.isRequired,
-  category: React.PropTypes.string.isRequired,
+  category: React.PropTypes.number.isRequired,
 };
 
 export default TodoList;

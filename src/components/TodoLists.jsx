@@ -12,7 +12,7 @@ const TodoLists = props => {
     {Range(0, 3).map(category => (
       <TodoList
         key={category}
-        category={category.toString()}
+        category={category}
         onRemove={onRemove}
         onMove={onMove}
         todos={todos.sortBy(todo => todo.text)}

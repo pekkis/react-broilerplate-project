@@ -10,7 +10,7 @@
     "lint": "eslint src --ext js --ext jsx",
     "babel-node": "babel-node",
     "start": "NODE_ENV=development nodemon --exec npm run babel-node -w src/server.js -- src/server.js",
-    "test": "ava -v"
+    "test": "NODE_ENV=test mocha --compilers js:babel-register --require ignore-styles"
   },
   "repository": {
     "type": "git",
@@ -22,22 +22,30 @@
   "author": "Pekkis",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@dr-kobros/react-broilerplate": "^0.11.0",
-    "@dr-kobros/react-broilerplate-server-express": "^0.4.0",
-    "axios": "^0.12.0",
+    "@dr-kobros/react-broilerplate": "^0.13.0",
+    "@dr-kobros/react-broilerplate-server-express": "^0.6.0",
+    "axios": "^0.13.1",
     "body-parser": "^1.15.1",
     "classnames": "^2.2.5",
-    "eslint-plugin-import": "^1.8.0",
-    "eslint-plugin-jsx-a11y": "^1.2.0",
     "immutable": "^3.8.1",
     "node-uuid": "^1.4.7",
     "normalize.css": "^4.1.1",
     "react-fa": "^4.1.1",
-    "react-immutable-proptypes": "^1.7.1"
+    "react-immutable-proptypes": "^2.1.0",
+    "react-inspector": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^2.9.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-react": "^5.1.1"
+    "chai": "^3.5.0",
+    "enzyme": "^2.4.1",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-react": "^6.0.0",
+    "ignore-styles": "^4.0.0",
+    "jsdom": "^9.4.2",
+    "jsdom-global": "^2.0.0",
+    "mocha": "^3.0.2",
+    "react-addons-test-utils": "^15.3.0"
   }
 }

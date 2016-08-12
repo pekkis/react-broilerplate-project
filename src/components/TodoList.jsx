@@ -1,7 +1,8 @@
 import React from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import Inspector from 'react-inspector';
 import Todo from './Todo';
 import styles from './TodoList.pcss';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const categoryNames = [
   'TODO',
@@ -14,6 +15,7 @@ const TodoList = ({ todos, onRemove, category, onMove }) => {
 
   return (
     <div className={styles.root}>
+      <Inspector data={todos} />
       <div className={styles.inner}>
         <h2>{filtered.count()} todos in category {categoryNames[category]}</h2>
         <ul>

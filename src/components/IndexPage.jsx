@@ -1,7 +1,7 @@
 import React from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 const IndexPage = props => {
   const {

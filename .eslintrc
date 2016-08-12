@@ -17,7 +17,8 @@
       ]
     }],
 
-    "react/jsx-no-bind": [1]
+    "react/jsx-no-bind": [1],
+    "import/no-extraneous-dependencies": "off"
   },
 
   "parserOptions": {

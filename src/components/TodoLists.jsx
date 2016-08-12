@@ -1,18 +1,18 @@
 import React from 'react';
-import TodoList from './TodoList';
 import { Range } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import TodoList from './TodoList';
 import styles from './TodoLists.pcss';
 
 const TodoLists = props => {
   const { onRemove, onMove, todos } = props;
-
   return (
     <div className={styles.root}>
+
     {Range(0, 3).map(category => (
       <TodoList
         key={category}
-        category={category}
+        category={category.toString()}
         onRemove={onRemove}
         onMove={onMove}
         todos={todos.sortBy(todo => todo.text)}

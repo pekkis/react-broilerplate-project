@@ -16,9 +16,7 @@ const IndexPage = props => {
   return (
     <section>
       <TodoLists todos={todos} onRemove={removeTodo} onMove={moveTodo} />
-
       <TodoForm onAdd={addTodo} />
-
       <button onClick={saveTodos.bind(null, todos)} disabled={!isChanged}>Save</button>
     </section>
   );

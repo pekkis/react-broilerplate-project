@@ -4,28 +4,24 @@ import Inspector from 'react-inspector';
 import Todo from './Todo';
 import styles from './TodoList.pcss';
 
-
-const TodoList = ({ todos, onRemove, category, onMove }) => {
-
-  return (
-    <div className={styles.root}>
-      <Inspector data={todos} />
-      <div className={styles.inner}>
-        <h2>{todos.count()} todos in category {category}</h2>
-        <ul>
-          {todos.map((todo, i) => (
-            <Todo
-              key={todo.id}
-              onRemove={onRemove}
-              onMove={onMove}
-              todo={todo}
-            />
-          ))}
-        </ul>
-      </div>
+const TodoList = ({ todos, onRemove, category, onMove }) => (
+  <div className={styles.root}>
+    <Inspector data={todos} />
+    <div className={styles.inner}>
+      <h2>{todos.count()} todos in category {category}</h2>
+      <ul>
+        {todos.map(todo => (
+          <Todo
+            key={todo.id}
+            onRemove={onRemove}
+            onMove={onMove}
+            todo={todo}
+          />
+        ))}
+      </ul>
     </div>
-  );
-};
+  </div>
+);
 
 TodoList.propTypes = {
   todos: ImmutablePropTypes.list.isRequired,

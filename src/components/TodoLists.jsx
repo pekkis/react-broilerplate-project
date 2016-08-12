@@ -14,7 +14,6 @@ const TodoLists = props => {
   const { onRemove, onMove, todos } = props;
   return (
     <div className={styles.root}>
-
     {Range(0, 3).map(category => (
       <TodoList
         key={category}

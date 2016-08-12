@@ -4,24 +4,18 @@ import Inspector from 'react-inspector';
 import Todo from './Todo';
 import styles from './TodoList.pcss';
 
-const categoryNames = [
-  'TODO',
-  'DOING',
-  'DONE',
-];
 
 const TodoList = ({ todos, onRemove, category, onMove }) => {
-  const filtered = todos.filter(todo => todo.category === category);
 
   return (
     <div className={styles.root}>
       <Inspector data={todos} />
       <div className={styles.inner}>
-        <h2>{filtered.count()} todos in category {categoryNames[category]}</h2>
+        <h2>{todos.count()} todos in category {category}</h2>
         <ul>
-          {filtered.map((todo, i) => (
+          {todos.map((todo, i) => (
             <Todo
-              key={i}
+              key={todo.id}
               onRemove={onRemove}
               onMove={onMove}
               todo={todo}
@@ -37,7 +31,7 @@ TodoList.propTypes = {
   todos: ImmutablePropTypes.list.isRequired,
   onRemove: React.PropTypes.func.isRequired,
   onMove: React.PropTypes.func.isRequired,
-  category: React.PropTypes.number.isRequired,
+  category: React.PropTypes.string.isRequired,
 };
 
 export default TodoList;

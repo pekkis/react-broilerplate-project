@@ -27,7 +27,8 @@ Stack
 - React-Redux-Router
 - PostCSS
 - CSS modules
-- Testing, universality and some other stuff are still in progress.
+- Testing with Mocha, Chai and Enzyme.
+- Universality and some other stuff are still in limbo.
 
 Instructions
 -------------

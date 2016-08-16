@@ -1,0 +1,7 @@
+[libs]
+./node_modules/fbjs/flow/lib
+
+[options]
+suppress_type=$FlowIssue
+module.name_mapper='.*\(.pcss\)' -> 'empty/object'
+

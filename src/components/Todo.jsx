@@ -1,12 +1,19 @@
+// @flow
+
 import React from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 import Icon from 'react-fa';
-
 import styles from './Todo.pcss';
 
-const Todo = props => {
-  const { todo, onRemove, onMove } = props;
+type Props = {
+  todo: Object,
+  onRemove: () => void,
+  onMove: () => void
+};
+
+const Todo = ({ todo, onRemove, onMove }: Props) => {
+
   const classes = classnames(
     styles.root
   );
@@ -31,12 +38,6 @@ const Todo = props => {
       </div>
     </li>
     );
-};
-
-Todo.propTypes = {
-  todo: React.PropTypes.object.isRequired,
-  onRemove: React.PropTypes.func.isRequired,
-  onMove: React.PropTypes.func.isRequired,
 };
 
 export default Todo;

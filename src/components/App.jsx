@@ -2,8 +2,11 @@ import React from 'react';
 import styles from './App.pcss';
 import logo from '../images/trollo.png';
 
-const App = props => {
-  const { children } = props;
+const Props = {
+  children: React.Element,
+};
+
+const App = ({ children }: Props) => {
   return (
     <div className={styles.root}>
       <h1>

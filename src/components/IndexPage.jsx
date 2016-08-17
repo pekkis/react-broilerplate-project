@@ -1,9 +1,21 @@
+// @flow
+
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
+import { List } from 'Immutable';
 
-const IndexPage = props => {
+type Props = {
+  saveTodos: () => void,
+  addTodo: () => void,
+  isChanged: boolean,
+  todos: List<Object>,
+  removeTodo: () => void,
+  moveTodo: () => void,
+};
+
+const IndexPage = (props: Props) => {
   const {
     saveTodos,
     addTodo,

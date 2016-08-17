@@ -1,13 +1,17 @@
+// @flow
+
 import React from 'react';
 import uuid from 'node-uuid';
 import styles from './TodoForm.pcss';
 
 export default class TodoForm extends React.Component {
 
-  onSubmit(e) {
+  text: HTMLInputElement;
+
+  onSubmit(e: Event) {
     e.preventDefault();
 
-    const newTodo = {
+    const newTodo: TodoItem = {
       id: uuid.v4(),
       text: this.text.value,
       category: 0,

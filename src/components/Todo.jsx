@@ -7,7 +7,7 @@ import Icon from 'react-fa';
 import styles from './Todo.pcss';
 
 type Props = {
-  todo: Object,
+  todo: TodoItem,
   onRemove: () => void,
   onMove: () => void
 };
@@ -38,6 +38,12 @@ const Todo = ({ todo, onRemove, onMove }: Props) => {
       </div>
     </li>
     );
+};
+
+Todo.propTypes = {
+  todo: React.PropTypes.object.isRequired,
+  onRemove: React.PropTypes.func.isRequired,
+  onMove: React.PropTypes.func.isRequired,
 };
 
 export default Todo;

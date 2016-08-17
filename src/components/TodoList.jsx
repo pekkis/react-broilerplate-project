@@ -3,11 +3,12 @@
 import React from 'react';
 import Inspector from 'react-inspector';
 import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import Todo from './Todo';
 import styles from './TodoList.pcss';
 
 type Props = {
-  todos: List<Object>,
+  todos: List<TodoItem>,
   onRemove: () => void,
   onMove: () => void,
   category: string
@@ -31,5 +32,12 @@ const TodoList = ({ todos, onRemove, category, onMove }: Props): React.Element<a
     </div>
   </div>
 );
+
+TodoList.propTypes = {
+  todos: ImmutablePropTypes.list.isRequired,
+  onRemove: React.PropTypes.func.isRequired,
+  onMove: React.PropTypes.func.isRequired,
+  category: React.PropTypes.string.isRequired,
+};
 
 export default TodoList;

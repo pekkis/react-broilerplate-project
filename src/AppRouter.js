@@ -18,7 +18,7 @@ type Store = {
 };
 
 type History = {
-  
+
 };
 
 export default function AppRouter({ store, history }: { store: Store, history: History }) {

@@ -34,9 +34,9 @@ export function moveTodo(id: string, direction: -1 | 1) {
 }
 
 export function receiveTodos() {
-  return function d(dispatch: (action: Action) => Action): Promise<List<TodoItem>> {
+  return function d(dispatch: (action: Action) => Action): Promise<Action> {
     return todoService.get().then(todos => {
-      dispatch({
+      return dispatch({
         type: RECEIVE_TODOS,
         payload: List(todos),
       });

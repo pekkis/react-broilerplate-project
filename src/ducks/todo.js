@@ -1,3 +1,5 @@
+// @flow
+
 import { List, Map } from 'immutable';
 import todoService from '../services/todo-service.localhost';
 
@@ -7,21 +9,21 @@ export const RECEIVE_TODOS = 'RECEIVE_TODOS';
 export const SAVE_TODOS = 'SAVE_TODOS';
 export const MOVE_TODO = 'MOVE_TODO';
 
-export function addTodo(todo) {
+export function addTodo(todo: TodoItem): Action {
   return {
     type: ADD_TODO,
     payload: todo,
   };
 }
 
-export function removeTodo(id) {
+export function removeTodo(id: string): Action {
   return {
     type: REMOVE_TODO,
     payload: id,
   };
 }
 
-export function moveTodo(id, direction) {
+export function moveTodo(id: string, direction: -1 | 1) {
   return {
     type: MOVE_TODO,
     payload: {
@@ -32,7 +34,7 @@ export function moveTodo(id, direction) {
 }
 
 export function receiveTodos() {
-  return function d(dispatch) {
+  return function d(dispatch: (action: Action) => Action): Promise<List<TodoItem>> {
     return todoService.get().then(todos => {
       dispatch({
         type: RECEIVE_TODOS,
@@ -42,8 +44,8 @@ export function receiveTodos() {
   };
 }
 
-export function saveTodos(todos) {
-  return function d(dispatch) {
+export function saveTodos(todos: List<TodoItem>) {
+  return function d(dispatch: (action: Action) => Action) {
     return todoService.save(todos).then(() => {
       dispatch({
         type: SAVE_TODOS,
@@ -52,12 +54,12 @@ export function saveTodos(todos) {
   };
 }
 
-const defaultState = Map({
+const defaultState: Map<string, any> = Map({
   todos: List(),
   isChanged: false,
 });
 
-export default function (state = defaultState, action) {
+export default function (state: Map<string, any> = defaultState, action: Action) {
   switch (action.type) {
 
     case RECEIVE_TODOS:
@@ -80,14 +82,25 @@ export default function (state = defaultState, action) {
       return state.set('isChanged', false);
 
     case MOVE_TODO:
+
+      if (!action.payload) {
+        throw "Invalid move action";
+      }
+
+      const id = action.payload.id;
+      const direction = action.payload.direction;
+      if (!id || !direction) {
+        throw "Invalid action";
+      }
+
       return state
       .updateIn(
         [
           'todos',
-          state.get('todos').findIndex(t => t.id === action.payload.id),
+          state.get('todos').findIndex(t => t.id === id),
         ], todo => ({
           ...todo,
-          category: todo.category + action.payload.direction,
+          category: todo.category + direction,
         })
       )
       .set('isChanged', true);

@@ -20,7 +20,7 @@ const TodoList = ({ todos, onRemove, category, onMove }: Props): React.Element<a
     <div className={styles.inner}>
       <h2>{todos.count()} todos in category {category}</h2>
       <ul>
-        {todos.map((todo: Object): React.Element<any> => (
+        {todos.map((todo: TodoItem): React.Element<any> => (
           <Todo
             key={todo.id}
             onRemove={onRemove}

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import createFetchers from '@dr-kobros/react-broilerplate/lib/universal';
@@ -6,10 +8,24 @@ import App from './components/container/AppContainer';
 import IndexPage from './components/container/IndexPageContainer';
 import TodoPage from './components/container/TodoPageContainer';
 
-export default function AppRouter({ store, history }) {
+type Dispatch = (action: Action | ThunkAction | PromiseAction) => any;
+type GetState = () => Object;
+type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
+type PromiseAction = Promise<Action>;
+
+type Store = {
+  dispatch: Dispatch
+};
+
+type History = {
+  
+};
+
+export default function AppRouter({ store, history }: { store: Store, history: History }) {
   const { prefetcher } = createFetchers(store);
 
   function initApp(nextState, replaceState, callback) {
+
     store.dispatch(receiveTodos()).then(() => {
       callback();
     });
@@ -44,4 +60,3 @@ AppRouter.propTypes = {
   store: React.PropTypes.object.isRequired,
   history: React.PropTypes.object.isRequired,
 };
-

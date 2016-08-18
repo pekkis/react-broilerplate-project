@@ -3,6 +3,7 @@
   "env": {
     "development": {
       "plugins": [
+	"transform-class-properties",
 	["transform-flow-strip-types"],        
         ["react-transform", {
           // must be an array of objects

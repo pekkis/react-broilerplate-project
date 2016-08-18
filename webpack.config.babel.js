@@ -134,7 +134,7 @@ const envs = {
         devtool: 'cheap-module-source-map',
         entry: [
             'webpack-hot-middleware/client',
-            './src/client.jsx'
+            './src/client.js'
         ],
         output: {
             path: path.join(__dirname, 'dist'),

@@ -4,7 +4,7 @@ import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import TodoForm from './TodoForm';
 import TodoLists from './TodoLists';
-import { List } from 'Immutable';
+import { List } from 'immutable';
 
 type Props = {
   saveTodos: () => void,

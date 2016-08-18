@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-class-properties": "^6.11.5",
     "chai": "^3.5.0",
     "empty": "^0.10.1",
     "enzyme": "^2.4.1",

@@ -1,9 +1,11 @@
+// @flow
+
 import React from 'react';
 import styles from './App.pcss';
 import logo from '../images/trollo.png';
 
-const Props = {
-  children: React.Element,
+type Props = {
+  children: React.Element<any>,
 };
 
 const App = ({ children }: Props) => {

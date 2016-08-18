@@ -1,7 +1,17 @@
+// @flow
+
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { List } from 'immutable';
 
-const TodoPage = props => {
+type Props = {
+  todos: List<TodoItem>,
+  params: {
+    uuid: string,
+  },
+};
+
+const TodoPage = (props: Props) => {
   const { todos, params } = props;
   const currentTodo = todos.find(todo => todo.id === params.uuid);
 

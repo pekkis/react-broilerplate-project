@@ -1,5 +1,7 @@
+// @flow
+
 import React from 'react';
-import { Range } from 'immutable';
+import { Range, List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import TodoList from './TodoList';
 import styles from './TodoLists.pcss';
@@ -10,7 +12,13 @@ const categoryNames = [
   'DONE',
 ];
 
-const TodoLists = props => {
+type Props = {
+  onRemove: () => void,
+  onMove: () => void,
+  todos: List<TodoItem>,
+};
+
+const TodoLists = (props: Props) => {
   const { onRemove, onMove, todos } = props;
   return (
     <div className={styles.root}>

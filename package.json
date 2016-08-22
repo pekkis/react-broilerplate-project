@@ -24,7 +24,7 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "@dr-kobros/react-broilerplate": "^0.13.0",
-    "@dr-kobros/react-broilerplate-server-express": "^0.6.0",
+    "@dr-kobros/react-broilerplate-server-express": "^0.7.0",
     "axios": "^0.13.1",
     "body-parser": "^1.15.1",
     "classnames": "^2.2.5",

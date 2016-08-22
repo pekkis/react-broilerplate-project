@@ -46,5 +46,6 @@ createServer(config, webpackConfig, (app) => {
     todos = List(req.body);
     res.send(['ok']);
   });
-});
 
+  return Promise.resolve();
+});

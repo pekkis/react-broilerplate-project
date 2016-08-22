@@ -14,7 +14,7 @@ Use as you wish, but still read the license from LICENSE.
 Requirements
 -------------
 
-- A relatively new Node.js. I'm running 5.x nowadays. Nobody really knows.
+- A new Node.js. I'm running 6.x nowadays.
 - NPM version 3. My understanding of how to mark dependencies vs dependencies of dependencies is not complete.
 
 Stack
@@ -22,13 +22,14 @@ Stack
 
 - Webpack
 - Babel
+- Flow
 - React
 - Redux
 - React-Redux-Router
 - PostCSS
 - CSS modules
 - Testing with Mocha, Chai and Enzyme.
-- Universality and some other stuff are still in limbo.
+- Universality and some other stuff are still unresolved.
 
 Instructions
 -------------

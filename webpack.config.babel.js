@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
-import Webpack_isomorphic_tools_plugin from 'webpack-isomorphic-tools/plugin';
 import merge from 'merge';
 import autoprefixer from 'autoprefixer';
 import precss from 'precss';
@@ -9,7 +8,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import pkg from './package.json';
 import clientConf from './config.client';
 import { getStyleLoader } from '@dr-kobros/react-broilerplate/lib/webpack';
-import isomorphicConfig from './webpack-isomorphic.js';
 
 const ENV = process.env.NODE_ENV;
 const PATHS = {
@@ -18,15 +16,6 @@ const PATHS = {
     modules: path.resolve('./node_modules'),
     test: path.resolve('./test')
 };
-
-
-let webpack_isomorphic_tools_plugin;
-webpack_isomorphic_tools_plugin = new Webpack_isomorphic_tools_plugin(
-    isomorphicConfig
-);
-if (ENV === 'development') {
-    webpack_isomorphic_tools_plugin = webpack_isomorphic_tools_plugin.development();
-}
 
 const common = {
 
@@ -47,12 +36,12 @@ const common = {
                    test: /\.p?css$/,
                     include: [
                         PATHS.src,
+                    ],
+                    loaders: [
+                        'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                        'postcss-loader'
                     ]
                 },
-                [
-                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                    'postcss-loader'
-                ]
             ),
             getStyleLoader(
                 ENV,
@@ -60,14 +49,14 @@ const common = {
                     test: /\.css$/,
                     include: [
                         PATHS.modules,
+                    ],
+                    loaders: [
+                        'css-loader'
                     ]
                 },
-                [
-                    'css-loader'
-                ]
             ),
             {
-                test: webpack_isomorphic_tools_plugin.regular_expression('images'),
+                test: /\.(png|jpg|gif|ico|svg)$/,
                 loaders: [
                     'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
                     'img?minimize&optimizationLevel=5&progressive=true'
@@ -110,7 +99,6 @@ const common = {
 };
 
 const plugins = [
-    webpack_isomorphic_tools_plugin,
     new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
         title: 'JavaScript SchamaScript',
@@ -148,7 +136,7 @@ const envs = {
     prod: {
         devtool: 'source-map',
         entry: {
-            client: './src/client.jsx',
+            client: './src/client.js',
         },
 
         output: {

@@ -3,6 +3,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import { receiveTodos } from './ducks/todo';
+import { Provider } from 'react-redux';
 import App from './components/container/AppContainer';
 import IndexPage from './components/container/IndexPageContainer';
 import TodoPage from './components/container/TodoPageContainer';
@@ -20,9 +21,15 @@ type History = {
 
 };
 
-export default function AppRouter({ store, history }: { store: Store, history: History }) {
+export default function Root({ store, history, isInitial }: { store: Store, history: History, isInitial: Boolean }) {
 
   function initApp(nextState, replaceState, callback) {
+
+    // Hot reloading kludge, how to prevent dis?
+    if (!isInitial) {
+      callback();
+      return;
+    }
 
     store.dispatch(receiveTodos()).then(() => {
       callback();
@@ -45,16 +52,18 @@ export default function AppRouter({ store, history }: { store: Store, history: H
   */
 
   return (
-    <Router history={history}>
-      <Route path="/" component={App} onEnter={initApp}>
-        <IndexRoute component={IndexPage} />
-        <Route path="todo/:uuid" component={TodoPage} />
-      </Route>
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path="/" component={App} onEnter={initApp}>
+          <IndexRoute component={IndexPage} />
+          <Route path="todo/:uuid" component={TodoPage} />
+        </Route>
+      </Router>
+    </Provider>
   );
 }
 
-AppRouter.propTypes = {
+Root.propTypes = {
   store: React.PropTypes.object.isRequired,
   history: React.PropTypes.object.isRequired,
 };

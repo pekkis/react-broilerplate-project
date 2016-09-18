@@ -2,25 +2,47 @@ import React from 'react';
 import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
 import { createStore } from '@dr-kobros/react-broilerplate/lib/redux';
-import { createApp } from '@dr-kobros/react-broilerplate/lib/app';
-import * as reducers from './reducers';
-import AppRouter from './AppRouter';
+import * as reducers from './ducks';
+import Root from './Root';
+import { AppContainer } from 'react-hot-loader';
+
 const { store, history } = createStore(reducers, browserHistory);
 
-const router = (
-  <AppRouter store={store} history={history} />
+const root = document.getElementById('app');
+
+render(
+  <AppContainer>
+    <Root store={store} history={history} isInitial={true} />
+  </AppContainer>,
+  root
 );
 
-const root = document.getElementById('app');
-const app = createApp(store, history, router);
+if (module.hot) {
+  module.hot.accept('./Root', () => {
+    const Root = require('./Root').default;
+    render(
+      <AppContainer>
+        <Root store={store} history={history} isInitial={false} />
+      </AppContainer>,
+      root
+    );
+  });
+}
 
+// const app = createApp(store, history, router);
+
+/*
 if (__DEVELOPMENT__) {
   const RedBox = require('redbox-react').default
   try {
-    render(app, root);
+    render(
+      router,
+      root
+    );
   } catch (e) {
     render(<RedBox error={e} />, root);
   }
 } else {
-  render(app, root);
+  render(router, root);
 }
+*/

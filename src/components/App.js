@@ -12,7 +12,7 @@ const App = ({ children }: Props) => {
   return (
     <div className={styles.root}>
       <h1>
-        <img alt="Trollo" src={logo} /> Trollo
+        <img alt="Trollo" src={logo} /> Trollotiri
       </h1>
       {children}
     </div>

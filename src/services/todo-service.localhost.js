@@ -3,17 +3,18 @@
 import axios from 'axios';
 import { List } from 'immutable';
 import type { TodoService } from './todo-service';
+import config from '../../config.client';
 
 const service: TodoService = {
 
   get: (): Promise<List<TodoItem>> => (
     axios
-      .get('http://localhost:8888/api/todo')
+      .get(`${config.api}/api/todo`)
       .then(response => response.data)
   ),
 
   save: (todos: List<TodoItem>) => (
-    axios.post('http://localhost:8888/api/todo', todos)
+    axios.post(`${config.api}/api/todo`, todos)
   ),
 };
 

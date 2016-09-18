@@ -1,11 +1,7 @@
 {
   "presets": ["react", "stage-0", "es2015"],
-  "env": {
-    "development": {
-      "plugins": [
-	"transform-class-properties",
-	"transform-flow-strip-types"        
-      ]
-    }
-  }
+  "plugins": [
+    "transform-class-properties",
+	  "transform-flow-strip-types"        
+  ]
 }

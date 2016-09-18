@@ -7,7 +7,6 @@ import Root from './Root';
 import { AppContainer } from 'react-hot-loader';
 
 const { store, history } = createStore(reducers, browserHistory);
-
 const root = document.getElementById('app');
 
 render(
@@ -28,21 +27,3 @@ if (module.hot) {
     );
   });
 }
-
-// const app = createApp(store, history, router);
-
-/*
-if (__DEVELOPMENT__) {
-  const RedBox = require('redbox-react').default
-  try {
-    render(
-      router,
-      root
-    );
-  } catch (e) {
-    render(<RedBox error={e} />, root);
-  }
-} else {
-  render(router, root);
-}
-*/

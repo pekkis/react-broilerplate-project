@@ -23,17 +23,14 @@ type History = {
 
 export default function Root({ store, history, isInitial }: { store: Store, history: History, isInitial: Boolean }) {
 
-  function initApp(nextState, replaceState, callback) {
+  function initApp(nextState, replaceState) {
 
     // Hot reloading kludge, how to prevent dis?
     if (!isInitial) {
-      callback();
       return;
     }
 
-    store.dispatch(receiveTodos()).then(() => {
-      callback();
-    });
+    store.dispatch(receiveTodos());
   }
 
   /*

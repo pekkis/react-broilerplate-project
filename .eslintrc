@@ -7,6 +7,9 @@
   ],
 
   rules: {
+    
+    "arrow-parens": [0],
+
     "new-cap": [2, {
       "capIsNewExceptions": [
         "List",

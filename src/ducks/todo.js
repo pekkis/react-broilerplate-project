@@ -3,29 +3,23 @@
 import { List, Map } from 'immutable';
 import todoService from '../services/todo-service.localhost';
 
-export const ADD_TODO = 'ADD_TODO';
-export const REMOVE_TODO = 'REMOVE_TODO';
-export const RECEIVE_TODOS = 'RECEIVE_TODOS';
-export const SAVE_TODOS = 'SAVE_TODOS';
-export const MOVE_TODO = 'MOVE_TODO';
-
 export function addTodo(todo: TodoItem): Action {
   return {
-    type: ADD_TODO,
+    type: 'ADD_TODO',
     payload: todo,
   };
 }
 
 export function removeTodo(id: string): Action {
   return {
-    type: REMOVE_TODO,
+    type: 'REMOVE_TODO',
     payload: id,
   };
 }
 
 export function moveTodo(id: string, direction: -1 | 1) {
   return {
-    type: MOVE_TODO,
+    type: 'MOVE_TODO',
     payload: {
       id,
       direction,
@@ -34,24 +28,17 @@ export function moveTodo(id: string, direction: -1 | 1) {
 }
 
 export function receiveTodos() {
-  return function d(dispatch: (action: Action) => Action): Promise<Action> {
-    return todoService.get().then(todos => {
-      return dispatch({
-        type: RECEIVE_TODOS,
-        payload: List(todos),
-      });
-    });
+  return {
+    type: 'RECEIVE_TODOS',
+    payload: todoService.get(),
   };
 }
 
 export function saveTodos(todos: List<TodoItem>) {
-  return function d(dispatch: (action: Action) => Action) {
-    return todoService.save(todos).then(() => {
-      dispatch({
-        type: SAVE_TODOS,
-      });
-    });
-  };
+  return {
+    type: 'SAVE_TODOS',
+    payload: todoService.save(todos)
+  }
 }
 
 const defaultState: Map<string, any> = Map({
@@ -60,17 +47,20 @@ const defaultState: Map<string, any> = Map({
 });
 
 export default function (state: Map<string, any> = defaultState, action: Action) {
+
+  console.log(action);
+
   switch (action.type) {
 
-    case RECEIVE_TODOS:
-      return state.update('todos', todos => todos.concat(action.payload));
+    case 'RECEIVE_TODOS_FULFILLED':
+      return state.set('todos', action.payload);
 
-    case ADD_TODO:
+    case 'ADD_TODO':
       return state
         .update('todos', todos => todos.push(action.payload))
         .set('isChanged', true);
 
-    case REMOVE_TODO:
+    case 'REMOVE_TODO':
       return state
         .deleteIn([
           'todos',
@@ -78,10 +68,10 @@ export default function (state: Map<string, any> = defaultState, action: Action)
         ])
         .set('isChanged', true);
 
-    case SAVE_TODOS:
+    case 'SAVE_TODOS_FULFILLED':
       return state.set('isChanged', false);
 
-    case MOVE_TODO:
+    case 'MOVE_TODO':
 
       if (!action.payload) {
         throw "Invalid move action";
@@ -92,6 +82,7 @@ export default function (state: Map<string, any> = defaultState, action: Action)
       if (!id || !direction) {
         throw "Invalid action";
       }
+
 
       return state
       .updateIn(

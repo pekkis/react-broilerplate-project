@@ -6,16 +6,13 @@ import type { TodoService } from './todo-service';
 import config from '../../config.client';
 
 const service: TodoService = {
-
   get: (): Promise<List<TodoItem>> => (
     axios
       .get(`${config.api}/api/todo`)
-      .then(response => response.data)
+      .then((response: Object): Object => List(response.data))
   ),
 
-  save: (todos: List<TodoItem>) => (
-    axios.post(`${config.api}/api/todo`, todos)
-  ),
+  save: (todos: List<TodoItem>): Promise<any> => axios.post(`${config.api}/api/todo`, todos),
 };
 
 export default service;

@@ -5,8 +5,15 @@ import { createStore } from '@dr-kobros/react-broilerplate/lib/redux';
 import * as reducers from './ducks';
 import Root from './Root';
 import { AppContainer } from 'react-hot-loader';
+import promiseMiddleware from 'redux-promise-middleware';
 
-const { store, history } = createStore(reducers, browserHistory);
+const { store, history } = createStore(
+  reducers,
+  browserHistory,
+  [
+      promiseMiddleware(),
+  ]
+);
 const root = document.getElementById('app');
 
 render(

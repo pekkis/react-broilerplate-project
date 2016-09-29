@@ -8,84 +8,87 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import pkg from './package.json';
 import clientConf from './config.client';
 import { getStyleLoader } from '@dr-kobros/react-broilerplate/lib/webpack';
+import { List } from 'immutable';
 
 const ENV = process.env.NODE_ENV;
+
 const PATHS = {
-  src: path.resolve('./src'),
-  build: path.resolve('./dist'),
-  modules: path.resolve('./node_modules'),
-  test: path.resolve('./test')
+  src: path.resolve(__dirname, './src'),
+  build: path.resolve(__dirname, './dist'),
+  modules: path.resolve(__dirname, './node_modules'),
+  test: path.resolve(__dirname, './test')
 };
+
+export function getPostCss() {
+  return function () {
+    return [autoprefixer, precss];
+  }
+}
+
+export function getCommonLoaders(ENV) {
+  return List([
+    getStyleLoader(
+      ENV,
+      {
+        test: /\.p?css$/,
+        include: [
+          PATHS.src,
+        ],
+        loaders: [
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss-loader'
+        ]
+      },
+    ),
+    getStyleLoader(
+      ENV,
+      {
+        test: /\.css$/,
+        include: [
+          PATHS.modules,
+        ],
+        loaders: [
+          'css-loader'
+        ]
+      },
+    ),
+    {
+      test: /\.(png|jpg|gif|ico|svg)$/,
+      loaders: [
+        'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
+        'img?minimize&optimizationLevel=5&progressive=true'
+      ],
+      include: [
+        PATHS.src
+      ]
+    },
+    {
+      test: /font.*\.(woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]',
+      include: [
+        PATHS.src,
+        PATHS.modules
+      ]
+    }
+  ]);
+}
 
 const common = {
 
   context: __dirname,
 
   module: {
-    loaders: [
+    loaders: getCommonLoaders(PATHS, ENV).concat(
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: [
           PATHS.modules,
         ]
-      },
-      getStyleLoader(
-        ENV,
-        {
-          test: /\.p?css$/,
-          include: [
-            PATHS.src,
-          ],
-          loaders: [
-            'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-            'postcss-loader'
-          ]
-        },
-      ),
-      getStyleLoader(
-        ENV,
-        {
-          test: /\.css$/,
-          include: [
-            PATHS.modules,
-          ],
-          loaders: [
-            'css-loader'
-          ]
-        },
-      ),
-      {
-        test: /\.(png|jpg|gif|ico|svg)$/,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
-          'img?minimize&optimizationLevel=5&progressive=true'
-        ],
-        include: [
-          PATHS.src
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]',
-        include: [
-          PATHS.src,
-          PATHS.modules
-        ]
-      },
-      {
-        test: /\.(svg)(\?v=[0-9]\.[0-9]\.[0-9])$/,
-        loader: 'file-loader?name=assets/fonts/[name].[ext]',
-        include: [
-          PATHS.src,
-          PATHS.modules
-        ]
       }
-    ]
+    ).toJS()
   },
-  postcss: function () {
-    return [autoprefixer, precss];
-  },
+  postcss: getPostCss(),
   resolve: {
     modulesDirectories: ['node_modules'],
     root: [
@@ -101,9 +104,9 @@ const common = {
 const plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
   new HtmlWebpackPlugin({
-    title: 'JavaScript SchamaScript',
-    template: 'web/index.html',
-    favicon: 'web/favicon.ico',
+    title: 'Visma Sign',
+    template: 'src/index.html',
+    favicon: 'public/favicon.ico',
     inject: 'body'
   }),
   new webpack.DefinePlugin({
@@ -114,7 +117,6 @@ const plugins = [
 ];
 
 const envs = {
-
   test: {
     devtool: 'inline-source-map' //just do inline source maps instead of the default
   },

@@ -12,7 +12,8 @@
     "start": "NODE_ENV=development nodemon --exec npm run babel-node -w src/server.js -- src/server.js",
     "test": "NODE_ENV=test mocha --compilers js:babel-register --require ignore-styles",
     "flow": "flow",
-    "serve": "NODE_ENV=production ./node_modules/.bin/nodemon --exec ./node_modules/.bin/babel-node src/server.js"
+    "serve": "NODE_ENV=production ./node_modules/.bin/nodemon --exec ./node_modules/.bin/babel-node src/server.js",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "redux-promise-middleware": "^4.0.0"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.20.1",
     "babel-cli": "^6.14.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",

@@ -1,6 +1,6 @@
 // @flow
 
-declare type TodoItem = {
+declare type TodoType = {
   id: string,
   category: number,
   text: string

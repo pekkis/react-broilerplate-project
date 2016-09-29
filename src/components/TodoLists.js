@@ -15,7 +15,7 @@ const categoryNames = [
 type Props = {
   onRemove: () => void,
   onMove: () => void,
-  todos: List<TodoItem>,
+  todos: List<TodoType>,
 };
 
 const TodoLists = (props: Props) => {

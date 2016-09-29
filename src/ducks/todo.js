@@ -3,7 +3,7 @@
 import { List, Map } from 'immutable';
 import todoService from '../services/todo-service.localhost';
 
-export function addTodo(todo: TodoItem): Action {
+export function addTodo(todo: TodoType): Action {
   return {
     type: 'ADD_TODO',
     payload: todo,
@@ -34,7 +34,7 @@ export function receiveTodos() {
   };
 }
 
-export function saveTodos(todos: List<TodoItem>) {
+export function saveTodos(todos: List<TodoType>) {
   return {
     type: 'SAVE_TODOS',
     payload: todoService.save(todos)

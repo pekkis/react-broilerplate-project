@@ -11,7 +11,7 @@ export default class TodoForm extends React.Component {
   onSubmit(e: Event) {
     e.preventDefault();
 
-    const newTodo: TodoItem = {
+    const newTodo: TodoType = {
       id: uuid.v4(),
       text: this.text.value,
       category: 0,

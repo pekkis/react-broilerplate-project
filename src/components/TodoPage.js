@@ -5,7 +5,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 
 type Props = {
-  todos: List<TodoItem>,
+  todos: List<TodoType>,
   params: {
     uuid: string,
   },

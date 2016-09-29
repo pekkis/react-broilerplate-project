@@ -7,7 +7,7 @@ import Icon from 'react-fa';
 import styles from './Todo.pcss';
 
 type Props = {
-  todo: TodoItem,
+  todo: TodoType,
   onRemove: () => void,
   onMove: () => void
 };

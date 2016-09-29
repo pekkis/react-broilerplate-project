@@ -8,7 +8,7 @@ import Todo from './Todo';
 import styles from './TodoList.pcss';
 
 type Props = {
-  todos: List<TodoItem>,
+  todos: List<TodoType>,
   onRemove: () => void,
   onMove: () => void,
   category: string
@@ -16,11 +16,10 @@ type Props = {
 
 const TodoList = ({ todos, onRemove, category, onMove }: Props): React.Element<any> => (
   <div className={styles.root}>
-    <Inspector data={todos} />
     <div className={styles.inner}>
       <h2>{todos.count()} todos in category {category}</h2>
       <ul>
-        {todos.map((todo: TodoItem): React.Element<any> => (
+        {todos.map((todo: TodoType): React.Element<any> => (
           <Todo
             key={todo.id}
             onRemove={onRemove}

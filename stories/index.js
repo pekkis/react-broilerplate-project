@@ -15,7 +15,6 @@ const todos = List.of(
   },
 );
 
-
 storiesOf('TodoList', module)
   .add('with some todos', () => {
     return (

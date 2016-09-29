@@ -2,8 +2,8 @@
 
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import TodoForm from './TodoForm';
-import TodoLists from './TodoLists';
+import TodoForm from '../components/TodoForm';
+import TodoLists from '../components/TodoLists';
 import { List } from 'immutable';
 
 type Props = {

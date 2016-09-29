@@ -5,8 +5,8 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { receiveTodos } from './ducks/todo';
 import { Provider } from 'react-redux';
 import App from './components/container/AppContainer';
-import IndexPage from './components/container/IndexPageContainer';
-import TodoPage from './components/container/TodoPageContainer';
+import IndexPage from './pages/container/IndexPageContainer';
+import TodoPage from './pages/container/TodoPageContainer';
 
 type Dispatch = (action: Action | ThunkAction | PromiseAction) => any;
 type GetState = () => Object;

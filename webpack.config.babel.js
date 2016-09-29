@@ -104,9 +104,9 @@ const common = {
 const plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
   new HtmlWebpackPlugin({
-    title: 'Visma Sign',
-    template: 'src/index.html',
-    favicon: 'public/favicon.ico',
+    title: 'Trollo',
+    template: 'web/index.html',
+    favicon: 'web/favicon.ico',
     inject: 'body'
   }),
   new webpack.DefinePlugin({

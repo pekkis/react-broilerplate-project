@@ -48,8 +48,6 @@ const defaultState: Map<string, any> = Map({
 
 export default function (state: Map<string, any> = defaultState, action: Action) {
 
-  console.log(action);
-
   switch (action.type) {
 
     case 'RECEIVE_TODOS_FULFILLED':

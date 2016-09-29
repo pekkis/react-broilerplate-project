@@ -4,8 +4,27 @@ import bodyParser from 'body-parser';
 import { List } from 'immutable';
 import config from '../config.server';
 import webpackConfig from '../webpack.config.babel';
+import socketIo from 'socket.io';
 
-createServer(config, webpackConfig, (app) => {
+createServer(config, webpackConfig, (app, httpServer) => {
+
+  const gaylordUuid = uuid.v4();
+
+  const io = socketIo(httpServer);
+  io.on('connection', socket => {
+
+    console.log('connetto grandi');
+
+    socket.emit('action', {
+      type: 'CHAT_MESSAGE',
+      payload: {
+        nick: 'Gaylord',
+        gravatar: 'gaylord.lohiposki@dr-kobros.com',
+        text: 'Hello hello, how may I help you?',
+      },
+    });
+  });
+
   app.use(bodyParser.json());
   let todos = List.of(
     {

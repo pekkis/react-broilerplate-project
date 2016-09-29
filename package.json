@@ -37,7 +37,9 @@
     "react-hot-loader": "^3.0.0-beta.4",
     "react-immutable-proptypes": "^2.1.0",
     "react-inspector": "^1.1.0",
-    "redux-promise-middleware": "^4.0.0"
+    "redux-promise-middleware": "^4.0.0",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.20.1",

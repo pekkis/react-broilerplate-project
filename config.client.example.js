@@ -1,3 +1,4 @@
 export default {
-  api: ''
+  api: '',
+  socketIo: 'http://localhost:8888',
 };

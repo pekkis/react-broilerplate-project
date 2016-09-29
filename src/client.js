@@ -6,8 +6,8 @@ import * as reducers from './ducks';
 import Root from './Root';
 import { AppContainer } from 'react-hot-loader';
 import promiseMiddleware from 'redux-promise-middleware';
-import socketIo from 'socket.io-client';
 import config from '../config.client';
+import socketIoMiddleware from './redux/socket-io';
 
 const logger = store => next => action => {
   console.log('dispatching', action);
@@ -21,25 +21,12 @@ const { store, history } = createStore(
   browserHistory,
   [
       promiseMiddleware(),
-      logger
+      logger,
+      socketIoMiddleware(config.socketIo),
   ]
 );
 
 const root = document.getElementById('app');
-const socket = socketIo(config.socketIo);
-
-socket.on('connect', () => {
-  console.log('connetto grandi');
-});
-
-socket.on('action', action => {
-  store.dispatch(action);
-  console.log(data);
-});
-
-socket.on('disconnect', () => {
-  console.log('game over man');
-});
 
 render(
   <AppContainer>

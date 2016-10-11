@@ -27,9 +27,9 @@ export function moveTodo(id: string, direction: -1 | 1) {
   };
 }
 
-export function receiveTodos() {
+export function getTodos() {
   return {
-    type: 'RECEIVE_TODOS',
+    type: 'GET_TODOS',
     payload: todoService.get(),
   };
 }
@@ -50,7 +50,7 @@ export default function (state: Map<string, any> = defaultState, action: Action)
 
   switch (action.type) {
 
-    case 'RECEIVE_TODOS_FULFILLED':
+    case 'GET_TODOS_FULFILLED':
       return state.set('todos', action.payload);
 
     case 'ADD_TODO':

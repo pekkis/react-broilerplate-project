@@ -6,7 +6,7 @@ import Wrapped from '../IndexPage';
 import {
   addTodo,
   removeTodo,
-  receiveTodos,
+  getTodos,
   saveTodos,
   moveTodo,
 } from '../../ducks/todo';
@@ -21,6 +21,6 @@ export default connect(
     removeTodo,
     saveTodos,
     moveTodo,
-    receiveTodos,
+    getTodos,
   }, dispatch)
 )(Wrapped);

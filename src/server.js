@@ -2,26 +2,38 @@ import uuid from 'node-uuid';
 import { createServer } from '@dr-kobros/react-broilerplate-server-express';
 import bodyParser from 'body-parser';
 import { List } from 'immutable';
+import socketIo from 'socket.io';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise-middleware';
 import config from '../config.server';
 import webpackConfig from '../webpack.config.babel';
-import socketIo from 'socket.io';
+import * as reducers from './ducks';
+import { addUser, addMessage } from './ducks/chat';
+
+const store = createStore(
+  combineReducers(reducers),
+  applyMiddleware(promiseMiddleware())
+);
+
+const { payload: gaylord } = store.dispatch(
+  addUser('gaylord', 'gaylord.lohiposki@dr-kobros.com')
+);
+
+store.dispatch(addMessage(gaylord.uuid, 'Yo yo, lets get this chat going'));
 
 createServer(config, webpackConfig, (app, httpServer) => {
-
-  const gaylordUuid = uuid.v4();
 
   const io = socketIo(httpServer);
   io.on('connection', socket => {
 
-    console.log('connetto grandi');
+    socket.emit('action', {
+      type: 'CHAT_SET_USERS',
+      payload: store.getState().chat.get('users'),
+    });
 
     socket.emit('action', {
-      type: 'CHAT_MESSAGE',
-      payload: {
-        nick: 'Gaylord',
-        gravatar: 'gaylord.lohiposki@dr-kobros.com',
-        text: 'Hello hello, how may I help you?',
-      },
+      type: 'CHAT_SET_MESSAGES',
+      payload: store.getState().chat.get('messages'),
     });
   });
 

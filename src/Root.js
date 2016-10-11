@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
-import { receiveTodos } from './ducks/todo';
+import { getTodos } from './ducks/todo';
 import { Provider } from 'react-redux';
 import App from './components/container/AppContainer';
 import IndexPage from './pages/container/IndexPageContainer';
@@ -30,7 +30,7 @@ export default function Root({ store, history, isInitial }: { store: Store, hist
       return;
     }
 
-    store.dispatch(receiveTodos());
+    store.dispatch(getTodos());
   }
 
   /*

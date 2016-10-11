@@ -7,7 +7,7 @@ import precss from 'precss';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import pkg from './package.json';
 import clientConf from './config.client';
-import { getStyleLoader } from '@dr-kobros/react-broilerplate/lib/webpack';
+import { getStyleLoader } from './src/broilerplate-util/webpack';
 import { List } from 'immutable';
 
 const ENV = process.env.NODE_ENV;

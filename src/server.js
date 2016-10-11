@@ -1,5 +1,5 @@
 import uuid from 'node-uuid';
-import { createServer } from '@dr-kobros/react-broilerplate-server-express';
+import { createServer } from './broilerplate-util/express';
 import bodyParser from 'body-parser';
 import { List } from 'immutable';
 import config from '../config.server';
